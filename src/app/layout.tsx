@@ -35,11 +35,7 @@ export default function RootLayout({
           fontSans.variable,
           fontDecor.variable,
         )}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange>
+        <ThemeProvider attribute="class" defaultTheme="dark" disableTransitionOnChange>
           <NavigationBar />
           {children}
         </ThemeProvider>
