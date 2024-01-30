@@ -12,9 +12,9 @@ import {
 } from '@/components/ui/navigation-menu';
 import Link from 'next/link';
 import Image from 'next/image';
-import LogoLight from '@public/vc-logo.png';
-import LogoDark from '@public/vc-logo-white.png';
-import {useTheme} from 'next-themes';
+import LogoLight from '@public/vcLogoDark.png';
+import LogoDark from '@public/vcLogoWhite.png';
+import LogoTheme from '@ui/logo-theme';
 import {Button, buttonVariants} from '@components/ui/button';
 import {ModeToggle} from '@ui/mode-toggle';
 import {
@@ -26,6 +26,8 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 import {HamburgerMenuIcon} from '@radix-ui/react-icons';
+import {LiaFacebookSquare, LiaInstagram} from 'react-icons/lia';
+import style from '@/theme-image.module.css';
 
 const components: {title: string; href: string; description: string}[] = [
   {
@@ -34,39 +36,9 @@ const components: {title: string; href: string; description: string}[] = [
     description:
       'A modal dialog that interrupts the user with important content and expects a response.',
   },
-  {
-    title: 'Hover Card',
-    href: '/docs/primitives/hover-card',
-    description: 'For sighted users to preview content available behind a link.',
-  },
-  {
-    title: 'Progress',
-    href: '/docs/primitives/progress',
-    description:
-      'Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.',
-  },
-  {
-    title: 'Scroll-area',
-    href: '/docs/primitives/scroll-area',
-    description: 'Visually or semantically separates content.',
-  },
-  {
-    title: 'Tabs',
-    href: '/docs/primitives/tabs',
-    description:
-      'A set of layered sections of content—known as tab panels—that are displayed one at a time.',
-  },
-  {
-    title: 'Tooltip',
-    href: '/docs/primitives/tooltip',
-    description:
-      'A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.',
-  },
 ];
 
 export default function NavigationBar() {
-  const {theme} = useTheme();
-  const isDarkMode = theme === 'dark';
   return (
     <div className="flex flex-row items-center justify-between sm:max-w-[1200px] px-4 mx-auto">
       <NavigationMenu>
@@ -74,11 +46,33 @@ export default function NavigationBar() {
           <NavigationMenuItem>
             <Link href="/" legacyBehavior passHref>
               <NavigationMenuLink className={cn(navigationMenuTriggerStyle())}>
-                {isDarkMode ? (
-                  <Image src={LogoDark} alt="vietclimb logo" width={130} />
-                ) : (
-                  <Image src={LogoLight} alt="vietclimb logo" width={130} />
-                )}
+                <LogoTheme
+                  srcDark={LogoDark}
+                  srcLight={LogoLight}
+                  alt="logo vietclimb"
+                  style={{
+                    width: '100px',
+                    height: 'auto',
+                  }}
+                />
+              </NavigationMenuLink>
+            </Link>
+          </NavigationMenuItem>
+          <NavigationMenuItem>
+            <Link href="https://www.instagram.com/vietclimb/" legacyBehavior passHref>
+              <NavigationMenuLink
+                target="_blank"
+                className={cn(navigationMenuTriggerStyle(), 'p-2')}>
+                <LiaInstagram className="h-6 w-6" />
+              </NavigationMenuLink>
+            </Link>
+          </NavigationMenuItem>
+          <NavigationMenuItem>
+            <Link href="https://www.facebook.com/VietClimb/" legacyBehavior passHref>
+              <NavigationMenuLink
+                target="_blank"
+                className={cn(navigationMenuTriggerStyle(), 'p-2')}>
+                <LiaFacebookSquare className="h-6 w-6" />
               </NavigationMenuLink>
             </Link>
           </NavigationMenuItem>

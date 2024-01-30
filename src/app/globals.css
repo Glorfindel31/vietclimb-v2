@@ -25,6 +25,8 @@
     --ring: 40 100% 48%;
     --radius: 0rem;
     --font-decor: 'Fjalla One', sans-serif;
+    --imgDark: none;
+    --imgLight: flex;
   }
 
   .dark {
@@ -48,6 +50,8 @@
     --input: 12 6.5% 15.1%;
     --ring: 40 100% 48%;
     --font-decor: 'Fjalla One', sans-serif;
+    --imgDark: flex;
+    --imgLight: none;
   }
 }
 

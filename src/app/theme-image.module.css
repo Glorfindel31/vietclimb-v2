@@ -1,0 +1,6 @@
+.imgDark {
+  display: var(--imgDark);
+}
+.imgLight {
+  display: var(--imgLight);
+}
