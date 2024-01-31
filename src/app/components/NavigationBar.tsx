@@ -27,18 +27,10 @@ import {
 } from '@/components/ui/sheet';
 import {HamburgerMenuIcon} from '@radix-ui/react-icons';
 import {LiaFacebookSquare, LiaInstagram} from 'react-icons/lia';
-import style from '@/theme-image.module.css';
 
-const components: {title: string; href: string; description: string}[] = [
-  {
-    title: 'Alert Dialog',
-    href: '/docs/primitives/alert-dialog',
-    description:
-      'A modal dialog that interrupts the user with important content and expects a response.',
-  },
-];
+import {data as MenuData, NavigationBarProps} from '@/types/navBarTypes';
 
-export default function NavigationBar() {
+export default function NavigationBar(MenuProps: NavigationBarProps) {
   return (
     <div className="flex flex-row items-center justify-between sm:max-w-[1200px] px-4 mx-auto">
       <NavigationMenu>
