@@ -1,19 +1,9 @@
-import {Button} from '@components/ui/button';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@components/ui/card';
-import {ModeToggle} from './components/ui/mode-toggle';
-import {Input} from '@components/ui/input';
-import {Label} from '@components/ui/label';
-import {Popover, PopoverContent, PopoverTrigger} from '@components/ui/popover';
-
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24"></main>
+    <main className="flex min-h-screen flex-col items-center">
+      <div className="w-screen h-96 bg-slate-300">a box</div>
+      <div className="w-screen h-96 bg-slate-400">a box</div>
+      <div className="w-screen h-96 bg-slate-900">a box</div>
+    </main>
   );
 }

@@ -3,10 +3,7 @@ import {cn} from '@/lib/utils';
 import Link from 'next/link';
 import {
   Sheet,
-  SheetClose,
   SheetContent,
-  SheetDescription,
-  SheetFooter,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
