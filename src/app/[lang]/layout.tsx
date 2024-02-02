@@ -2,9 +2,10 @@ import type {Metadata} from 'next';
 import {Montserrat as FontSans} from 'next/font/google';
 import {Fjalla_One as FontDecor} from 'next/font/google';
 import {cn} from '@/lib/utils';
-import './globals.css';
-import {ThemeProvider} from './context/theme-provider';
+import '../globals.css';
+import {ThemeProvider} from '@/context/theme-provider';
 import NavigationBar from '@components/NavigationBar';
+import {defaultLocale} from '@/../../src/middleware';
 
 export const fontSans = FontSans({
   subsets: ['latin'],
@@ -24,11 +25,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  params,
 }: Readonly<{
   children: React.ReactNode;
+  params: {lang: string};
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang={params.lang ?? defaultLocale} suppressHydrationWarning>
       <body
         className={cn(
           'min-h-screen bg-background font-sans antialiased w-full',
