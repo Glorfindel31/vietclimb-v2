@@ -1,33 +1,9 @@
-import {NextRequest, NextResponse} from 'next/server';
-import {match} from '@formatjs/intl-localematcher';
-import Negotiator from 'negotiator';
-
-let locales = ['vn', 'en'];
-export let defaultLocale = 'en'; //need to change for deployment
-
-function getLocale(request: Request): string {
-  const headers = new Headers(request.headers);
-  const acceptLanguage = headers.get('accept-language');
-  if (acceptLanguage) {
-    headers.set('accept-language', acceptLanguage.replaceAll('_', '-'));
-  }
-
-  const headersObject = Object.fromEntries(headers.entries());
-  const languages = new Negotiator({headers: headersObject}).languages();
-  return match(languages, locales, defaultLocale);
-}
+import {i18nRouter} from 'next-i18n-router';
+import i18nConfig from '../i18nConfig';
+import {NextRequest} from 'next/server';
 
 export function middleware(request: NextRequest) {
-  const {pathname} = request.nextUrl;
-  const pathnameHasLocale = locales.some(
-    locale => pathname.startsWith(`/${locale}`) || pathname === `/${locale}`,
-  );
-  if (pathnameHasLocale) return;
-
-  const locale = getLocale(request);
-  request.nextUrl.pathname = `/${locale}${pathname}`;
-
-  return Response.redirect(request.nextUrl);
+  return i18nRouter(request, i18nConfig);
 }
 
 export const config = {

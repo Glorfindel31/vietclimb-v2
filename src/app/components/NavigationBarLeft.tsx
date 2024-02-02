@@ -12,6 +12,7 @@ import LogoLight from '@public/vcLogoDark.png';
 import LogoDark from '@public/vcLogoWhite.png';
 import LogoTheme from '@ui/logo-theme';
 import {LiaFacebookSquare, LiaInstagram} from 'react-icons/lia';
+import ToggleLanguage from '@ui/toggle-language';
 
 export default function NavigationBarLeft() {
   return (
@@ -49,6 +50,9 @@ export default function NavigationBarLeft() {
               <LiaFacebookSquare className="h-6 w-6" />
             </NavigationMenuLink>
           </Link>
+        </NavigationMenuItem>
+        <NavigationMenuItem>
+          <ToggleLanguage />
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>

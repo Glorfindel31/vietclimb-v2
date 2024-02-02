@@ -1,11 +1,12 @@
 import type {Metadata} from 'next';
+import {ReactNode} from 'react';
+import {dir} from 'i18next';
 import {Montserrat as FontSans} from 'next/font/google';
 import {Fjalla_One as FontDecor} from 'next/font/google';
 import {cn} from '@/lib/utils';
 import '../globals.css';
 import {ThemeProvider} from '@/context/theme-provider';
 import NavigationBar from '@components/NavigationBar';
-import {defaultLocale} from '@/../../src/middleware';
 
 export const fontSans = FontSans({
   subsets: ['latin'],
@@ -25,13 +26,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-  params,
-}: Readonly<{
-  children: React.ReactNode;
-  params: {lang: string};
-}>) {
+  params: {locale},
+}: {
+  children: ReactNode;
+  params: {locale: string};
+}) {
   return (
-    <html lang={params.lang ?? defaultLocale} suppressHydrationWarning>
+    <html lang={locale} dir={dir(locale)} suppressHydrationWarning>
       <body
         className={cn(
           'min-h-screen bg-background font-sans antialiased w-full',
@@ -39,7 +40,7 @@ export default function RootLayout({
           fontDecor.variable,
         )}>
         <ThemeProvider attribute="class" defaultTheme="dark" disableTransitionOnChange>
-          <NavigationBar />
+          <NavigationBar params={{locale}} />
           {children}
         </ThemeProvider>
       </body>

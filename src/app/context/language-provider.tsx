@@ -1,12 +1,23 @@
 'use client';
-import {createContext, useContext, useState} from 'react';
+import {I18nextProvider} from 'react-i18next';
+import {ReactNode} from 'react';
+import initTranslations from '@/i18n';
+import {Resource, createInstance} from 'i18next';
 
-const LanguageContext = createContext('vn');
+export default function TranslationsProvider({
+  children,
+  locale,
+  namespaces,
+  resources,
+}: {
+  children: ReactNode;
+  locale: string;
+  namespaces: string[];
+  resources: Resource;
+}) {
+  const i18n = createInstance();
 
-export const LanguageProvider = ({children}: {children: React.ReactNode}) => {
-  const [language, setLanguage] = useState('vn');
+  initTranslations(locale, namespaces, i18n, resources);
 
-  return <LanguageContext.Provider value={language}>{children}</LanguageContext.Provider>;
-};
-
-export const useLanguage = () => useContext(LanguageContext);
+  return <I18nextProvider i18n={i18n}>{children}</I18nextProvider>;
+}
