@@ -6,7 +6,7 @@ import {Fjalla_One as FontDecor} from 'next/font/google';
 import {cn} from '@/lib/utils';
 import '../globals.css';
 import {ThemeProvider} from '@/context/theme-provider';
-import NavigationBar from '@components/NavigationBar';
+import {ClerkProvider} from '@clerk/nextjs';
 
 export const fontSans = FontSans({
     subsets: ['latin'],
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     description: 'Vietclimb is the first climbing gym in Vietnam',
 };
 
-export default function RootLayout({
+export default function AdminLayout({
     children,
     params: {locale},
 }: {
@@ -32,21 +32,22 @@ export default function RootLayout({
     params: {locale: string};
 }) {
     return (
-        <html lang={locale} dir={dir(locale)} suppressHydrationWarning>
-            <body
-                className={cn(
-                    'min-h-screen bg-background font-sans antialiased w-full',
-                    fontSans.variable,
-                    fontDecor.variable,
-                )}>
-                <ThemeProvider
-                    attribute="class"
-                    defaultTheme="dark"
-                    disableTransitionOnChange>
-                    <NavigationBar params={{locale}} />
-                    {children}
-                </ThemeProvider>
-            </body>
-        </html>
+        <ClerkProvider>
+            <html lang={locale} dir={dir(locale)} suppressHydrationWarning>
+                <body
+                    className={cn(
+                        'min-h-screen bg-background font-sans antialiased w-full',
+                        fontSans.variable,
+                        fontDecor.variable,
+                    )}>
+                    <ThemeProvider
+                        attribute="class"
+                        defaultTheme="dark"
+                        disableTransitionOnChange>
+                        {children}
+                    </ThemeProvider>
+                </body>
+            </html>
+        </ClerkProvider>
     );
 }
