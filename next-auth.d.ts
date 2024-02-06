@@ -8,21 +8,21 @@ declare module 'next-auth' {
         user: {
             name: string;
             id: string;
-            role: string;
-            email: string;
+            role?: string;
+            email?: string;
         } & DefaultSession;
     }
     interface User extends DefaultUser {
-        email: string;
+        email?: string;
         name: string;
-        role: string;
+        role?: string;
     }
 }
 
 declare module 'next-auth/jwt' {
     interface JWT extends DefaultJWT {
-        email: string;
+        email?: string;
         name: string;
-        role: string;
+        role?: string;
     }
 }

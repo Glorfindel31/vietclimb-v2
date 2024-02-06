@@ -1,25 +1,19 @@
 import {i18nRouter} from 'next-i18n-router';
 import i18nConfig from '../i18nConfig';
-import {NextRequest} from 'next/server';
-import {authMiddleware} from '@clerk/nextjs';
+import {withAuth, NextRequestWithAuth} from 'next-auth/middleware';
+import {NextResponse} from 'next/server';
 
-// export function middleware(request: NextRequest) {
-//     return i18nRouter(request, i18nConfig);
-// }
-
-export default authMiddleware({
-    beforeAuth: (request: NextRequest) => {
-        return i18nRouter(request, i18nConfig);
+export default withAuth(
+    function middleware(request: NextRequestWithAuth) {
+        if (!request.nextUrl.pathname.startsWith('/admin'))
+            return i18nRouter(request, i18nConfig);
     },
-
-    publicRoutes: ['/', '/[locale]/'],
-});
-
+    {
+        callbacks: {
+            authorized: ({token}) => !!token,
+        },
+    },
+);
 export const config = {
-    matcher: [
-        // Skip all internal paths (_next)
-        '/((?!_next|api|favicon.ico|admin).*)',
-        // Optional: only run on root (/) URL
-        // '/'
-    ],
+    matcher: ['/admin'],
 };
