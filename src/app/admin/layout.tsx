@@ -6,8 +6,7 @@ import {Fjalla_One as FontDecor} from 'next/font/google';
 import {cn} from '@/lib/utils';
 import '../globals.css';
 import {ThemeProvider} from '@/context/theme-provider';
-import {ClerkProvider} from '@clerk/nextjs';
-
+import AuthProvider from '@/context/auth-provider';
 export const fontSans = FontSans({
     subsets: ['latin'],
     variable: '--font-sans',
@@ -32,22 +31,22 @@ export default function AdminLayout({
     params: {locale: string};
 }) {
     return (
-        <ClerkProvider>
-            <html lang={locale} dir={dir(locale)} suppressHydrationWarning>
-                <body
-                    className={cn(
-                        'min-h-screen bg-background font-sans antialiased w-full',
-                        fontSans.variable,
-                        fontDecor.variable,
-                    )}>
+        <html lang={locale} dir={dir(locale)} suppressHydrationWarning>
+            <body
+                className={cn(
+                    'min-h-screen bg-background font-sans antialiased w-full',
+                    fontSans.variable,
+                    fontDecor.variable,
+                )}>
+                <AuthProvider>
                     <ThemeProvider
                         attribute="class"
                         defaultTheme="dark"
                         disableTransitionOnChange>
                         {children}
                     </ThemeProvider>
-                </body>
-            </html>
-        </ClerkProvider>
+                </AuthProvider>
+            </body>
+        </html>
     );
 }

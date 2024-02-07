@@ -1,19 +1,12 @@
 import {i18nRouter} from 'next-i18n-router';
 import i18nConfig from '../i18nConfig';
-import {withAuth, NextRequestWithAuth} from 'next-auth/middleware';
-import {NextResponse} from 'next/server';
+import {NextRequest} from 'next/server';
 
-export default withAuth(
-    function middleware(request: NextRequestWithAuth) {
-        if (!request.nextUrl.pathname.startsWith('/admin'))
-            return i18nRouter(request, i18nConfig);
-    },
-    {
-        callbacks: {
-            authorized: ({token}) => !!token,
-        },
-    },
-);
+export function middleware(request: NextRequest) {
+    return i18nRouter(request, i18nConfig);
+}
+
+// only applies this middleware to files in the app directory
 export const config = {
-    matcher: ['/admin'],
+    matcher: '/((?!api|static|.*\\..*|_next|favicon\\.ico|admin).*)',
 };
